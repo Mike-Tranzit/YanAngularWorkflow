@@ -2,8 +2,8 @@ name: Actions Workflow
 
 on:
     push:
-      branches-ignore:
-        - null
+      #branches-ignore:
+      #  - null
       branches:
         - master
         - 'feature/*' # matchers feature/b1 feature/b2 ....
