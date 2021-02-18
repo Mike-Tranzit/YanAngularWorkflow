@@ -1,9 +1,25 @@
 name: Actions Workflow
 
-on: #[push, pull_request]
+on:
     push:
-    pull_request:
-      types: [closed, assigned, opened, reopened]
+      branches-ignore:
+        - null
+      branches:
+        - master
+        - 'feature/*' # matchers feature/b1 feature/b2 ....
+      #  - 'feature/**' # matchers feature/b1/* feature/b2/* ....
+      #  - '!feature/**' # ignore branch ....
+      # tags:
+      #  - 'v1.*'
+      # paths:
+      #  - '**.js' # only if in commit we find js files
+      #  - '!filename.js' #ignore
+      # paths-ignore:
+      #  - 'docs/**'
+    #[push, pull_request]
+    # push:
+    # pull_request:
+    #  types: [closed, assigned, opened, reopened]
 
 jobs:
   run-github-actions:
