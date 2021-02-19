@@ -13,7 +13,7 @@ jobs:
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJSON(job) }}
-        run: eсcho "$JOB_CONTEXT"
+        run: echo "$JOB_CONTEXT"
       - name: Dump steps context
         if: failure() # вернет true Только если предыдущий шаг сфейлился
         env:

@@ -6,9 +6,12 @@ on: [push]
 jobs:
   run-shell-command:
     runs-on: ubuntu-latest
+    timeout-minutes: 30 # если больше этого времени то все отменится
     steps:
       - name: echo a string
         run: echo "Hello world"
+        continue-on-error: true # будет тут ошибка остальные таски все равно будут работать
+        timeout-minutes: 30 # максимум времени на степ
       - name: multyline script
         run: |
           node -v
