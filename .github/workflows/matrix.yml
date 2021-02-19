@@ -10,5 +10,5 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 6
-       - name: Log node Verison
-          run: node -v
+      - name: Log node Verison
+        run: node -v
