@@ -1,9 +1,10 @@
 name: Context
-on: push
+on: [push, pull-request]
 
 jobs:
   one:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
     steps:
       - name: Dump GitHub context
         env:
@@ -12,12 +13,14 @@ jobs:
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJSON(job) }}
-        run: echo "$JOB_CONTEXT"
+        run: eсcho "$JOB_CONTEXT"
       - name: Dump steps context
+        if: failure() # вернет true Только если предыдущий шаг сфейлился
         env:
           STEPS_CONTEXT: ${{ toJSON(steps) }}
         run: echo "$STEPS_CONTEXT"
       - name: Dump runner context
+        if: always() # будет запущен в любом случае
         env:
           RUNNER_CONTEXT: ${{ toJSON(runner) }}
         run: echo "$RUNNER_CONTEXT"
