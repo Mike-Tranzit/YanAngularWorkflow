@@ -7,8 +7,17 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest] # будет прогнаны все таски 9 раз версия + ОС
         node_version: [6, 8, 10] # прогнать все джобсы с разными версия Node
+        include:
+          - os: ubuntu-latest # extra values для действующей конфигурации
+            node_version: 8
+            is_ubuntu_8: "true" # только когда будет ubuntu version 8
+        exclude:
+          - os: ubuntu-latest # пропустит ubuntu с 6й версией
+            node_version: 6
       max-parallel: 2
     runs-on: ubuntu-latest
+    env:
+      IS_UBUNTU_8: ${{ matrix.is_ubuntu_8 }} # берется с строки 13
     steps:
       - name: Log node Verison
         run: node -v
@@ -16,4 +25,6 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
       - name: Log node Verison
-        run: node -v
+        run: |
+          node -v
+          echo $IS_UBUNTU_8
